@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Google Sign-In -->
+	<key>GIDClientID</key>
+	<string>108156639404-p6rqtb9o6dmlld6tuv0ir9tpjmejkale.apps.googleusercontent.com</string>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.108156639404-p6rqtb9o6dmlld6tuv0ir9tpjmejkale</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>Google Sign-In</string>
+		</dict>
+	</array>
+
+	<!-- Privacy Purpose Strings -->
+	<key>NSCameraUsageDescription</key>
+	<string>Platr needs camera access to take photos for plate ownership verification.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Platr needs photo library access to set your profile picture and background.</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Platr uses your location to record where you spotted a plate. You can skip this.</string>
+
+	<!-- Push Notifications (background modes not needed for basic remote notifications) -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

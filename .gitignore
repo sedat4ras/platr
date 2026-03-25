@@ -1,0 +1,46 @@
+node_modules/
+.expo/
+dist/
+build/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Secrets — never commit these
+.env
+.env.local
+.env.production
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+
+# Backend secrets + runtime
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/__pycache__/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+backend/.venv/
+.venv/
+
+# User uploads (real files, never commit)
+uploads/
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
