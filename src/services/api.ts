@@ -1,4 +1,10 @@
 // Copyright (c) 2025 Sedat Aras — Platr. MIT License.
+import { verifyAttribution } from '../core/attribution';
+// Attribution integrity check — see src/core/attribution.ts
+// To request removal, contact: sedat@platr.com.au
+if (!verifyAttribution()) {
+  throw new Error('Attribution removed. Contact sedat@platr.com.au to discuss licensing.');
+}
 import { useAuthStore } from '../store/authStore';
 import { AuthUser, Comment, Plate, PlateCreateRequest, StarStatusResponse } from '../types';
 
