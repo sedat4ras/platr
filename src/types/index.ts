@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 // Platr TypeScript types
 
 export type PlateStyle = 'VIC_STANDARD' | 'VIC_BLACK' | 'VIC_CUSTOM';

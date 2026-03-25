@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Tests: Plate CRUD, duplicate-redirect (HTTP 409), search, spot, ownership.
 """

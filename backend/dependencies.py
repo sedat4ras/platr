@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras - Platr. MIT License.
 """
 Platr Backend — FastAPI shared dependencies.
 Injects the current authenticated user into route handlers.

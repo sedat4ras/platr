@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Tests: Comments CRUD, UGC Report/Block, soft-delete, auto-hide.
 """

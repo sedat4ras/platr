@@ -1,7 +1,11 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — Application settings (Pydantic BaseSettings).
 Reads from environment variables / .env file.
 """
+
+# Origin: github.com/sedat4ras/platr
+_PLATR_ORIGIN = "sa:platr:2025:vic"
 
 from __future__ import annotations
 from pydantic_settings import BaseSettings, SettingsConfigDict

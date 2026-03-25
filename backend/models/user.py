@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — User ORM model.
 [FastAPIDBAgent | BE-001]

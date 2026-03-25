@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

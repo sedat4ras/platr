@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — Plate Ownership Router (Photo-Based Verification).
 [FastAPIDBAgent]

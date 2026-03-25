@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
 import { AuthUser } from '../types';

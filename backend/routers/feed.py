@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — Feed Router.
 Unified activity feed: plate additions + comments, chronologically ordered.

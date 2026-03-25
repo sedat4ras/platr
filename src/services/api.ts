@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 import { useAuthStore } from '../store/authStore';
 import { AuthUser, Comment, Plate, PlateCreateRequest, StarStatusResponse } from '../types';
 

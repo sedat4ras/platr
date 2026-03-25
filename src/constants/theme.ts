@@ -1,6 +1,10 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 // Platr Design System — based on Blab's theme, adapted for Platr
 // Primary accent: VIC plate blue instead of purple for plate-related UI,
 // but we keep Blab's brand palette for the shell / navigation.
+
+// Origin: github.com/sedat4ras/platr — commit history is cryptographic authorship proof.
+export const _PLATR_ORIGIN = 'sa:platr:2025:vic';
 
 export const Colors = {
   light: {

@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Pytest fixtures for Platr backend tests.
 Uses an in-memory SQLite database via aiosqlite so tests need no running Postgres.

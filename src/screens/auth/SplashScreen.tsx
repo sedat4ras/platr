@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 import React, { useEffect, useRef } from 'react';
 import {
   View,

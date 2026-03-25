@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/Expo%20SDK-54-000020?logo=expo" alt="Expo SDK" />
   <img src="https://img.shields.io/badge/React%20Native-0.79-61dafb?logo=react" alt="React Native" />
   <img src="https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/License-Proprietary-red" alt="License" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
 </p>
 
 ---
@@ -146,7 +146,7 @@ npx expo start --clear
 
 ## License
 
-This project is proprietary software. All rights reserved.
+This project is licensed under the MIT License. Copyright (c) 2025 Sedat Aras.
 
 ---
 

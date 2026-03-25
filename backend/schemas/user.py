@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — User Pydantic schemas.
 [FastAPIDBAgent | BE-002]

@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras - Platr. MIT License.
 """
 Platr Backend — Email Service
 Sends transactional emails via Gmail SMTP using aiosmtplib.

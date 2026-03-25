@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 """
 Platr Backend — Async PostgreSQL database engine & session factory.
 Uses SQLAlchemy 2.x async engine with asyncpg driver.

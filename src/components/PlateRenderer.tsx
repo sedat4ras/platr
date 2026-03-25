@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 // Platr — PlateRenderer v2
 // Supports VIC_STANDARD, VIC_BLACK, and fully configurable VIC_CUSTOM.
 

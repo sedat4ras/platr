@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Sedat Aras — Platr. MIT License.
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +13,8 @@ export default function GroupsScreen() {
       <Ionicons name="people" size={56} color={colors.textSecondary} />
       <Text style={[styles.title, { color: colors.text }]}>Groups</Text>
       <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        Car communities are coming soon.{'\n'}
+        Car communities are coming soon.{'
+'}
         Connect with VIC plate owners, organise cruises, and more.
       </Text>
     </View>
