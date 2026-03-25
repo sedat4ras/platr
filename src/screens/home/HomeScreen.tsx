@@ -18,7 +18,7 @@ import { RootStackParamList } from '../../navigation/RootNavigator';
 import { useTheme } from '../../hooks/useTheme';
 import { BorderRadius, FontSizes, Spacing } from '../../constants/theme';
 import { listPlatesApi, searchPlatesApi } from '../../services/api';
-import { Plate, regoStatusDisplay, vehicleSummary } from '../../types';
+import { Plate } from '../../types';
 
 type Nav = StackNavigationProp<RootStackParamList>;
 
@@ -114,10 +114,6 @@ export default function HomeScreen() {
   // ── Search row ─────────────────────────────────────────────────────────────
 
   const renderSearchRow = ({ item }: { item: Plate }) => {
-    const { label, colorKey } = regoStatusDisplay(item.vehicle.rego_status);
-    const regoColor = colors[colorKey];
-    const summary = vehicleSummary(item.vehicle);
-
     return (
       <TouchableOpacity
         style={[styles.searchRow, { backgroundColor: colors.card, borderColor: colors.border }]}
@@ -134,17 +130,7 @@ export default function HomeScreen() {
             {item.plate_text}
           </Text>
           <View style={{ flex: 1 }} />
-          <View style={[styles.regoBadge, { backgroundColor: regoColor + '20' }]}>
-            <View style={[styles.regoDot, { backgroundColor: regoColor }]} />
-            <Text style={[styles.regoLabel, { color: regoColor }]}>{label}</Text>
-          </View>
         </View>
-
-        {!!summary && (
-          <Text style={[styles.vehicleSummary, { color: colors.textSecondary }]}>
-            {summary}
-          </Text>
-        )}
 
         <View style={styles.searchRowMeta}>
           {item.submitted_by_username && (
@@ -285,7 +271,6 @@ const styles = StyleSheet.create({
   },
   searchRowTop: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
   searchPlateText: { fontSize: FontSizes.lg, fontWeight: '700', fontFamily: 'monospace' },
-  vehicleSummary: { fontSize: FontSizes.sm },
   searchRowMeta: { flexDirection: 'row', gap: Spacing.md },
   metaChip: { fontSize: FontSizes.xs, fontWeight: '500' },
 
@@ -296,18 +281,6 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.sm,
   },
   stateBadgeText: { fontSize: FontSizes.xs, fontWeight: '700' },
-
-  // Rego badge
-  regoBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: BorderRadius.full,
-  },
-  regoDot: { width: 6, height: 6, borderRadius: 3 },
-  regoLabel: { fontSize: FontSizes.xs, fontWeight: '700' },
 
   // Empty
   emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.sm, paddingTop: 80 },

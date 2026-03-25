@@ -119,10 +119,6 @@ export async function getStarStatusApi(id: string): Promise<StarStatusResponse> 
   return request('GET', `/plates/${id}/star`);
 }
 
-export async function recheckRegoApi(id: string): Promise<Plate> {
-  return request('POST', `/plates/${id}/recheck`);
-}
-
 export async function listMyPlatesApi(): Promise<Plate[]> {
   return request('GET', '/plates/submitted-by-me');
 }

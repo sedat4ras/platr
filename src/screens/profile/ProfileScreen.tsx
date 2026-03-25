@@ -21,7 +21,7 @@ import { useAuthStore } from '../../store/authStore';
 import { useThemeStore } from '../../store/themeStore';
 import { BorderRadius, FontSizes, Spacing } from '../../constants/theme';
 import { listMyPlatesApi, fetchMeApi, deleteAccountApi } from '../../services/api';
-import { Plate, regoStatusDisplay } from '../../types';
+import { Plate } from '../../types';
 import PlateRenderer from '../../components/PlateRenderer';
 import { showToast } from '../../components/Toast';
 
@@ -172,7 +172,6 @@ export default function ProfileScreen() {
                 <Text style={[styles.plateCardText, { color: colors.text }]}>
                   {plate.plate_text}
                 </Text>
-                <RegoBadge plate={plate} colors={colors} />
                 <View style={styles.plateCardMeta}>
                   <Ionicons
                     name={plate.is_comments_open ? 'chatbubble' : 'lock-closed'}
@@ -283,17 +282,6 @@ function StatCell({ value, label, colors }: { value: number; label: string; colo
   );
 }
 
-function RegoBadge({ plate, colors }: { plate: Plate; colors: any }) {
-  const { label, colorKey } = regoStatusDisplay(plate.vehicle.rego_status);
-  const regoColor = colors[colorKey];
-  return (
-    <View style={[styles.regoBadge, { backgroundColor: regoColor + '20' }]}>
-      <View style={[styles.regoDot, { backgroundColor: regoColor }]} />
-      <Text style={[styles.regoLabel, { color: regoColor }]}>{label}</Text>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   hero: {
     alignItems: 'center',
@@ -362,18 +350,6 @@ const styles = StyleSheet.create({
   plateCardText: { fontSize: FontSizes.md, fontWeight: '700' },
   plateCardMeta: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   plateCardMetaText: { fontSize: FontSizes.xs, fontWeight: '500' },
-
-  regoBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: BorderRadius.full,
-    alignSelf: 'flex-start',
-  },
-  regoDot: { width: 6, height: 6, borderRadius: 3 },
-  regoLabel: { fontSize: FontSizes.xs, fontWeight: '700' },
 
   emptyPlates: { alignItems: 'center', gap: Spacing.sm, paddingVertical: Spacing.xl },
   emptyTitle: { fontSize: FontSizes.md, fontWeight: '700' },

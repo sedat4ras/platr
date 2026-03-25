@@ -17,7 +17,7 @@
 
 ## Overview
 
-Platr is a mobile social app built for Victorian (Australia) car enthusiasts. Every number plate gets its own profile page — users can look up any VIC plate, see the vehicle's live rego status, star plates they love, leave comments, and verify ownership via VicRoads. Plates can be displayed as rendered visuals or as real photos uploaded by the owner.
+Platr is a mobile social app built for Victorian (Australia) car enthusiasts. Every number plate gets its own profile page — users can star plates they love, leave comments, and verify ownership via VicRoads. Plates can be displayed as rendered visuals or as real photos uploaded by the owner.
 
 ### The Problem
 
@@ -25,7 +25,7 @@ There is no dedicated space online for Victorian car and plate culture. Enthusia
 
 ### The Solution
 
-Platr gives every VIC plate its own public profile. Anyone can add a plate, look up its live rego details, and engage with it. Owners verify ownership by submitting a VicRoads screenshot, unlocking owner controls. The app complies with Australian Privacy Principles and the Age-Restricted Platforms Act (16+).
+Platr gives every VIC plate its own public profile. Anyone can add a plate, engage with it, and claim ownership. Owners verify by submitting a VicRoads screenshot, unlocking owner controls. The app complies with Australian Privacy Principles and the Age-Restricted Platforms Act (16+).
 
 ---
 
@@ -38,14 +38,6 @@ Platr gives every VIC plate its own public profile. Anyone can add a plate, look
 | **Custom plate builder** | Background colour, text colour, border style, VIC badge, state text, separator |
 | **Photo mode** | Upload or photograph your real plate with an in-app pinch-zoom crop tool |
 | **Duplicate detection** | Alerts if a plate already exists with a link to the existing entry |
-
-### Rego & Vehicle Data
-| Feature | Description |
-|---------|------------|
-| **Live rego lookup** | Automatic check on plate creation |
-| **Manual recheck** | Refresh rego status at any time from the plate page |
-| **Vehicle details** | Year, make, model, colour, expiry date |
-| **Status badges** | Current / Expired / Cancelled / Checking… / Unknown |
 
 ### Social
 | Feature | Description |
@@ -66,7 +58,7 @@ Platr gives every VIC plate its own public profile. Anyone can add a plate, look
 | Feature | Description |
 |---------|------------|
 | **Edit profile** | Display name and bio |
-| **My plates** | All submitted plates with rego status |
+| **My plates** | All submitted plates |
 | **Account deletion** | Permanent, App Store compliant |
 | **Dark / light mode** | Persisted across sessions |
 
@@ -120,8 +112,7 @@ npx expo start --clear
 |-------|------------|--------|
 | 1 | Auth — Email / Google / Apple | ✅ Done |
 | 2 | Plate CRUD + Duplicate Detection | ✅ Done |
-| 3 | Live Rego Lookup | ✅ Done |
-| 4 | Plate Renderer — 3 styles + Custom | ✅ Done |
+| 3 | Plate Renderer — 3 styles + Custom | ✅ Done |
 | 5 | Photo Upload + Crop Tool | ✅ Done |
 | 6 | Star System | ✅ Done |
 | 7 | Comments + Two-Tier Moderation | ✅ Done |

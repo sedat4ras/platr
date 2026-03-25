@@ -24,11 +24,6 @@ export const Colors = {
     inputBackground: '#F3F4F6',
     disabled: '#D1D5DB',
     overlay: 'rgba(0, 0, 0, 0.5)',
-    // Rego status
-    regoGreen: '#10B981',
-    regoRed: '#EF4444',
-    regoGray: '#9CA3AF',
-    regoOrange: '#F59E0B',
   },
   dark: {
     primary: '#3B82F6',
@@ -47,11 +42,6 @@ export const Colors = {
     inputBackground: '#1F2937',
     disabled: '#4B5563',
     overlay: 'rgba(0, 0, 0, 0.7)',
-    // Rego status
-    regoGreen: '#34D399',
-    regoRed: '#F87171',
-    regoGray: '#6B7280',
-    regoOrange: '#FBBF24',
   },
 };
 

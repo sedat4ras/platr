@@ -99,12 +99,6 @@ export default function SearchScreen() {
               <Text style={[styles.plateText, { color: colors.text }]}>
                 {item.state_code} · {item.plate_text}
               </Text>
-              {item.vehicle.vehicle_make && (
-                <Text style={[styles.vehicleText, { color: colors.textSecondary }]}>
-                  {[item.vehicle.vehicle_year, item.vehicle.vehicle_make, item.vehicle.vehicle_model]
-                    .filter(Boolean).join(' ')}
-                </Text>
-              )}
               <View style={styles.meta}>
                 <Ionicons name="star" size={12} color={colors.textSecondary} />
                 <Text style={[styles.metaText, { color: colors.textSecondary }]}>{item.star_count}</Text>
@@ -132,7 +126,6 @@ const styles = StyleSheet.create({
   },
   rowInfo: { flex: 1, gap: 2 },
   plateText: { fontSize: FontSizes.md, fontWeight: '700' },
-  vehicleText: { fontSize: FontSizes.xs },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 2 },
   metaText: { fontSize: FontSizes.xs },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.md },

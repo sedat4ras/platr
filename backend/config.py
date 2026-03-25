@@ -34,11 +34,6 @@ class Settings(BaseSettings):
     secret_key: str = "change-me-in-production"
     access_token_expire_minutes: int = 60 * 24 * 7  # 7 days
 
-    # ── OSINT / RegoCheck ───────────────────────────────────────────────────
-    vicroads_base_url: str = "https://www.vicroads.vic.gov.au"
-    rego_check_rate_limit_seconds: float = 3.0
-    rego_check_timeout_seconds: int = 15
-
     # ── AI Moderation ────────────────────────────────────────────────────────
     anthropic_api_key: str = ""
 

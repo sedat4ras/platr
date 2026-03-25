@@ -3,8 +3,6 @@
 
 export type PlateStyle = 'VIC_STANDARD' | 'VIC_BLACK' | 'VIC_CUSTOM';
 
-export type RegoStatus = 'CURRENT' | 'EXPIRED' | 'CANCELLED' | 'UNKNOWN' | 'PENDING';
-
 // VIC badge position on custom plates
 export type VicBadgeStyle = 'none' | 'triangle_top' | 'vertical_left' | 'box_topleft';
 
@@ -39,16 +37,6 @@ export const DEFAULT_CUSTOM_CONFIG: CustomPlateConfig = {
   separator: '',
 };
 
-export interface VehicleDetails {
-  vehicle_year: number | null;
-  vehicle_make: string | null;
-  vehicle_model: string | null;
-  vehicle_color: string | null;
-  rego_status: RegoStatus;
-  rego_expiry_date: string | null;
-  rego_checked_at: string | null;
-}
-
 export interface Plate {
   id: string;
   state_code: string;
@@ -63,7 +51,6 @@ export interface Plate {
   plate_photo_path: string | null;
   ownership_verified: boolean;
   custom_config: CustomPlateConfig | null;
-  vehicle: VehicleDetails;
   created_at: string;
   updated_at: string;
 }
@@ -113,22 +100,3 @@ export const PLATE_STYLE_META: Record<PlateStyle, { displayName: string; maxChar
   VIC_CUSTOM:   { displayName: 'VIC Custom',     maxChars: 8, formatHint: 'e.g. MY1CAR' },
 };
 
-export const regoStatusDisplay = (status: RegoStatus): { label: string; colorKey: 'regoGreen' | 'regoRed' | 'regoGray' | 'regoOrange' } => {
-  switch (status) {
-    case 'CURRENT':   return { label: 'Current',   colorKey: 'regoGreen' };
-    case 'EXPIRED':   return { label: 'Expired',   colorKey: 'regoRed' };
-    case 'CANCELLED': return { label: 'Cancelled', colorKey: 'regoRed' };
-    case 'PENDING':   return { label: 'Checking…', colorKey: 'regoOrange' };
-    default:          return { label: 'Unknown',   colorKey: 'regoGray' };
-  }
-};
-
-export const vehicleSummary = (v: VehicleDetails): string => {
-  const parts = [
-    v.vehicle_year?.toString(),
-    v.vehicle_make,
-    v.vehicle_model,
-    v.vehicle_color ? `(${v.vehicle_color})` : null,
-  ].filter(Boolean);
-  return parts.join(' ');
-};

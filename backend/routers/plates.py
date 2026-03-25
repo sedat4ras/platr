@@ -13,8 +13,7 @@ GET  /plates/search       → Prefix search on plate_text
 GET  /plates/submitted-by-me → Current user's submitted plates (auth required)
 GET  /plates/{id}         → Plate detail (increments view_count)
 PATCH /plates/{id}        → Update style/icons/comments_open (owner only)
-POST  /plates/{id}/spot   → Increment spot_count (authenticated)
-POST  /plates/{id}/recheck → Re-trigger VicRoads rego check
+POST  /plates/{id}/photo  → Upload real plate photo
 """
 
 from __future__ import annotations
@@ -26,7 +25,7 @@ from typing import Annotated
 import os
 import aiofiles
 
-from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, Query, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from sqlalchemy import select, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -34,15 +33,13 @@ from sqlalchemy.orm import selectinload
 
 from backend.database import get_db
 from backend.dependencies import CurrentUser, CurrentUserOptional, DbDep
-from backend.models.plate import Plate, RegoStatus
+from backend.models.plate import Plate
 from backend.schemas.plate import (
     DuplicatePlateResponse,
     PlateCreate,
     PlateRead,
     PlateUpdate,
 )
-from backend.services.rego_check import enqueue_rego_check
-
 router = APIRouter(prefix="/plates", tags=["plates"])
 
 
@@ -67,7 +64,6 @@ async def _get_plate_or_404(plate_id: uuid.UUID, db: AsyncSession) -> Plate:
 )
 async def create_plate(
     payload: PlateCreate,
-    background_tasks: BackgroundTasks,
     db: DbDep,
     current_user: CurrentUser,
 ) -> PlateRead:
@@ -127,15 +123,6 @@ async def create_plate(
 
     await db.commit()
     await db.refresh(plate)
-
-    # Fire async OSINT rego check — does not block the response
-    background_tasks.add_task(
-        enqueue_rego_check,
-        plate_id=plate.id,
-        state_code=plate.state_code,
-        plate_text=plate.plate_text,
-    )
-
     return PlateRead.from_orm_with_vehicle(plate)
 
 
@@ -304,28 +291,3 @@ async def upload_plate_photo(
     return PlateRead.from_orm_with_vehicle(plate)
 
 
-@router.post("/{plate_id}/recheck", status_code=status.HTTP_202_ACCEPTED)
-async def recheck_plate_rego(
-    plate_id: uuid.UUID,
-    background_tasks: BackgroundTasks,
-    db: DbDep,
-    current_user: CurrentUser,
-) -> dict:
-    """
-    Re-trigger a VicRoads rego check for an existing plate.
-    Useful when rego status is UNKNOWN or stale.
-    """
-    plate = await _get_plate_or_404(plate_id, db)
-
-    # Mark as PENDING so the iOS client can show "Checking..." immediately
-    plate.rego_status = RegoStatus.PENDING
-    await db.commit()
-
-    background_tasks.add_task(
-        enqueue_rego_check,
-        plate_id=plate.id,
-        state_code=plate.state_code,
-        plate_text=plate.plate_text,
-    )
-
-    return {"detail": "Rego re-check queued", "plate_id": str(plate.id)}

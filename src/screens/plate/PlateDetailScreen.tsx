@@ -25,7 +25,6 @@ import {
   starPlateApi,
   unstarPlateApi,
   getStarStatusApi,
-  recheckRegoApi,
   listCommentsApi,
   postCommentApi,
   reportCommentApi,
@@ -34,7 +33,7 @@ import {
   toggleCommentsApi,
 } from '../../services/api';
 import { useAuthStore } from '../../store/authStore';
-import { Comment, Plate, regoStatusDisplay, vehicleSummary } from '../../types';
+import { Comment, Plate } from '../../types';
 import PlateRenderer from '../../components/PlateRenderer';
 import { showToast } from '../../components/Toast';
 
@@ -65,7 +64,6 @@ export default function PlateDetailScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [starred, setStarred]     = useState(false);
   const [starLoading, setStarLoading] = useState(false);
-  const [regoLoading, setRegoLoading] = useState(false);
   const [commentBody, setCommentBody] = useState('');
   const [postingComment, setPostingComment] = useState(false);
   const [claimState, setClaimState] = useState<ClaimState>('idle');
@@ -102,16 +100,6 @@ export default function PlateDetailScreen() {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     } catch { /* noop */ }
     finally { setStarLoading(false); }
-  };
-
-  const handleRecheck = async () => {
-    if (!plate) return;
-    setRegoLoading(true);
-    try {
-      const updated = await recheckRegoApi(plate.id);
-      setPlate(updated);
-    } catch { /* noop */ }
-    finally { setRegoLoading(false); }
   };
 
   const handlePostComment = async () => {
@@ -204,10 +192,6 @@ export default function PlateDetailScreen() {
       </View>
     );
   }
-
-  const { label: regoLabel, colorKey } = regoStatusDisplay(plate.vehicle.rego_status);
-  const regoColor = colors[colorKey];
-  const summary = vehicleSummary(plate.vehicle);
 
   const isOwner = !!currentUser && plate.owner_user_id === currentUser.id;
   const isOwnedByOther = plate.ownership_verified && plate.owner_user_id !== currentUser?.id;
@@ -345,52 +329,6 @@ export default function PlateDetailScreen() {
           )}
         </View>
       )}
-
-      {/* Vehicle Details card */}
-      <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>Vehicle Details</Text>
-
-        <View style={styles.regoRow}>
-          <Text style={[styles.regoKey, { color: colors.textSecondary }]}>Rego Status</Text>
-          <View style={[styles.regoBadge, { backgroundColor: regoColor + '20' }]}>
-            <View style={[styles.regoDot, { backgroundColor: regoColor }]} />
-            <Text style={[styles.regoValue, { color: regoColor }]}>{regoLabel}</Text>
-          </View>
-        </View>
-
-        {!!summary && (
-          <View style={[styles.detailRow, { borderTopColor: colors.border }]}>
-            <Text style={[styles.detailKey, { color: colors.textSecondary }]}>Vehicle</Text>
-            <Text style={[styles.detailVal, { color: colors.text }]}>{summary}</Text>
-          </View>
-        )}
-
-        {plate.vehicle.rego_expiry_date && (
-          <View style={[styles.detailRow, { borderTopColor: colors.border }]}>
-            <Text style={[styles.detailKey, { color: colors.textSecondary }]}>Expires</Text>
-            <Text style={[styles.detailVal, { color: colors.text }]}>
-              {new Date(plate.vehicle.rego_expiry_date).toLocaleDateString()}
-            </Text>
-          </View>
-        )}
-
-        <View style={[styles.divider, { backgroundColor: colors.border }]} />
-
-        <TouchableOpacity
-          style={styles.recheckBtn}
-          onPress={handleRecheck}
-          disabled={regoLoading}
-        >
-          {regoLoading ? (
-            <ActivityIndicator size="small" color={colors.primary} />
-          ) : (
-            <Ionicons name="refresh" size={14} color={colors.primary} />
-          )}
-          <Text style={[styles.recheckText, { color: regoLoading ? colors.textSecondary : colors.primary }]}>
-            {regoLoading ? 'Checking rego…' : 'Recheck Rego'}
-          </Text>
-        </TouchableOpacity>
-      </View>
 
       {/* Comments */}
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
@@ -584,33 +522,6 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.md,
   },
   claimSubmittedText: { fontSize: FontSizes.sm, fontWeight: '600' },
-
-  regoRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  regoKey: { fontSize: FontSizes.sm },
-  regoBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: BorderRadius.full,
-  },
-  regoDot: { width: 6, height: 6, borderRadius: 3 },
-  regoValue: { fontSize: FontSizes.xs, fontWeight: '700' },
-
-  detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: Spacing.sm,
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  detailKey: { fontSize: FontSizes.sm },
-  detailVal: { fontSize: FontSizes.sm, fontWeight: '500', flex: 1, textAlign: 'right' },
-
-  divider: { height: StyleSheet.hairlineWidth },
-
-  recheckBtn: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  recheckText: { fontSize: FontSizes.sm, fontWeight: '600' },
 
   closedRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   closedText: { fontSize: FontSizes.sm },

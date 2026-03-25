@@ -19,14 +19,11 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     UniqueConstraint,
-    Enum as SAEnum,
     Integer,
     Text,
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-import enum
-
 from backend.database import Base
 
 
@@ -39,14 +36,6 @@ class PlateStyle(str, enum.Enum):
     VIC_STANDARD = "VIC_STANDARD"   # White bg, blue border — "The Education State"
     VIC_BLACK    = "VIC_BLACK"      # Heritage matte black, chrome border
     VIC_CUSTOM   = "VIC_CUSTOM"     # Fully configurable: bg/text/border/badge/separator
-
-
-class RegoStatus(str, enum.Enum):
-    CURRENT   = "CURRENT"
-    EXPIRED   = "EXPIRED"
-    CANCELLED = "CANCELLED"
-    UNKNOWN   = "UNKNOWN"
-    PENDING   = "PENDING"   # Initial state before OSINT check completes
 
 
 class Plate(Base):
@@ -73,19 +62,6 @@ class Plate(Base):
 
     # Custom plate configuration — JSON string (populated for VIC_CUSTOM plates)
     custom_config: Mapped[str | None] = mapped_column(Text, nullable=True)
-
-    # ── Vehicle details (populated by OSINT / RegoCheck) ─────────────────────
-    vehicle_year: Mapped[int | None] = mapped_column(Integer)
-    vehicle_make: Mapped[str | None] = mapped_column(String(100))
-    vehicle_model: Mapped[str | None] = mapped_column(String(100))
-    vehicle_color: Mapped[str | None] = mapped_column(String(50))
-    rego_status: Mapped[RegoStatus] = mapped_column(
-        SAEnum(RegoStatus, name="rego_status_enum"),
-        default=RegoStatus.PENDING,
-        nullable=False,
-    )
-    rego_expiry_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    rego_checked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     # ── Display preferences ────────────────────────────────────────────────
     has_space_separator: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
